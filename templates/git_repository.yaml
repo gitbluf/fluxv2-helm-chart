@@ -1,0 +1,13 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  interval: {{ .Values.flux.repository.interval }}
+  url: {{ .Values.flux.repository.url }}
+  ref:
+    branch: {{ .Values.flux.repository.branch }}
+  secretRef:
+    name: {{ .Values.flux.secret }}
+  timeout: {{ .Values.flux.timeout }}

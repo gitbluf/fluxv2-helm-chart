@@ -1,0 +1,129 @@
+# Default values for fluxv2.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+prometheus:
+  enabled: true
+
+flux:
+  repository:
+    interval: 1m0
+    url: "test" # your url which flux will monitor
+    branch: master
+  secret: "test"
+  timeout: 30s
+
+# helm controller
+helm:
+  replicaCount: 1
+  nodeSelector: {}
+  image:
+    repository: ghcr.io/fluxcd/helm-controller
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: v0.10.1
+
+    podAnnotations: {}
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+
+
+  resources: {}
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# kustomize controller
+kustomize:
+  replicaCount: 1
+  nodeSelector: {}
+  image:
+    repository: ghcr.io/fluxcd/kustomize-controller
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: v0.12.2
+  
+  resources: {}
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+
+# image automation controller
+image_automation:
+  replicaCount: 1
+  nodeSelector: {}
+
+  image:
+    repository: ghcr.io/fluxcd/image-automation-controller
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: v0.11.0
+    pullPolicy: IfNotPresent
+
+# image reflector controller    
+image_reflector:
+  replicaCount: 1
+  nodeSelector: {}
+
+  image:
+    repository: ghcr.io/fluxcd/image-reflector-controller
+    tag: v0.9.1
+    pullPolicy: IfNotPresent
+  
+  resources: {}
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+source_controller:
+    replicaCount: 1
+    nodeSelector: {}
+
+    image:
+      repository: ghcr.io/fluxcd/source-controller
+      tag: v0.13.2
+      pullPolicy: IfNotPresent
+  
+    resources: {}
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+notification_controller:
+    replicaCount: 1
+    nodeSelector: {}
+
+    image:
+      repository: ghcr.io/fluxcd/notification-controller
+      tag: v0.14.1
+      pullPolicy: IfNotPresent
+  
+    resources: {}
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
